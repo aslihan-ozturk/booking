@@ -3,7 +3,6 @@ package com.vngrs.booking.service;
 import com.vngrs.booking.exception.ValidationException;
 import com.vngrs.booking.model.Doctor;
 import com.vngrs.booking.repository.DoctorRepository;
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +13,8 @@ import java.util.Objects;
 @Service
 public class DoctorService {
 
-    private final DoctorRepository doctorRepository;
-
-    public DoctorService(DoctorRepository doctorRepository){
-        this.doctorRepository = doctorRepository;
-    }
+    @Autowired
+     DoctorRepository doctorRepository;
 
     public Doctor saveDoctor(Doctor doctor){
         return doctorRepository.save(doctor);

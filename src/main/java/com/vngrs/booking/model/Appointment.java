@@ -26,7 +26,7 @@ public class Appointment {
     private Long doctorId;
     @NotNull(message = "fee required")
     private Double fee;
-    private String state;
+    private String state; // A for active appointment, C for cancelled
     @NotNull(message = "startDate required")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="Europe/Istanbul")
     private Timestamp startDate;

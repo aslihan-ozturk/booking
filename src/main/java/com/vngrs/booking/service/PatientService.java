@@ -20,18 +20,13 @@ import java.util.Objects;
 
 @Service
 public class PatientService {
+   @Autowired
+   PatientRepository patientRepository;
+    @Autowired
+     AppointmentRepository appointmentRepository;
+    @Autowired
+     DoctorRepository doctorRepository;
 
-    private final PatientRepository patientRepository;
-
-    private final AppointmentRepository appointmentRepository;
-
-    private final DoctorRepository doctorRepository;
-
-    public PatientService(PatientRepository patientRepository, AppointmentRepository appointmentRepository, DoctorRepository doctorRepository){
-        this.patientRepository = patientRepository;
-        this.appointmentRepository = appointmentRepository;
-        this.doctorRepository = doctorRepository;
-    }
 
     public List<PatientAppointmentResponseDTO> getAppointmentsByPatientId(Long patientId){
         List<PatientAppointmentResponseDTO> result = new ArrayList<>();

@@ -16,8 +16,8 @@ public class Transaction {
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long transactionId;
-     private String transactionType; //cancel appointment transaction or save appointment transaction
-     private String transactionState; // transaction is active or returned (in the case of cancellation)
+     private String transactionType; //cancel appointment transaction (C) or save (S) appointment transaction
+     private String transactionState; // transaction is active (A) or returned (R)(in the case of cancellation)
      private Double price;
      private Timestamp transactionDate;
      private Long appointmentId;

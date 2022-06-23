@@ -12,6 +12,7 @@ import com.vngrs.booking.model.requestDto.GetAppointmentFeeRequestDTO;
 import com.vngrs.booking.repository.AppointmentRepository;
 import com.vngrs.booking.repository.DoctorRepository;
 import com.vngrs.booking.repository.TransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
@@ -24,23 +25,23 @@ import java.util.Objects;
 @Service
 public class AppointmentService {
 
-    private final AppointmentRepository appointmentRepository;
+    @Autowired
+     AppointmentRepository appointmentRepository;
+    @Autowired
+     DoctorRepository doctorRepository;
+    @Autowired
+     TransactionRepository transactionRepository;
 
-    private final DoctorRepository doctorRepository;
-
-    private final TransactionRepository transactionRepository;
 
 
-    public AppointmentService(TransactionRepository transactionRepository, AppointmentRepository appointmentRepository, DoctorRepository doctorRepository){
-        this.transactionRepository = transactionRepository;
-        this.appointmentRepository = appointmentRepository;
-        this.doctorRepository = doctorRepository;
-    }
 
     public Double getAppointmentFee(GetAppointmentFeeRequestDTO requestDTO) throws ValidationException, BusinessException {
         isAppointmentAvailable(requestDTO.getDoctorId(), requestDTO.getPatientId(), requestDTO.getStartDate(), requestDTO.getEndDate());
         Double hourlyRate = doctorRepository.getHourlyRate(requestDTO.getDoctorId());
         Long duration = (requestDTO.getEndDate().getTime() - requestDTO.getStartDate().getTime()) / 3600000 ;
+        if(duration < 1){
+            throw new ValidationException("Appointments cant be shorter than an hour");
+        }
         return duration * hourlyRate;
     }
 
