@@ -1,6 +1,6 @@
-# vngrs-booking
+# booking
 
-Vngrs-booking is a web API for storing and managing clinic operations.
+booking is a web API for storing and managing clinic operations.
 
 I used h2 embedded database to store data. Tables and records are created automatically during initialization of project. (data.sql and schema.sql files used 
 for creation can be seen underresource package.) Data.sql file can be edited to manipulate initial records of db.
